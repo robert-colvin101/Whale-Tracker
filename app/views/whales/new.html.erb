@@ -1,0 +1,13 @@
+<%  require 'open-uri'
+require 'nokogiri'
+
+profile = 'calcionft'
+url = "https://opensea.io/#{profile}?tab=activity"
+
+html_file = URI.open(url).read
+html_doc = Nokogiri::HTML(html_file)%>
+
+<%  html_doc.search('.AccountHeader--bio').each do |details| %>
+  <h1> <%=  details.text.strip %> </h1>
+<% end %>
+

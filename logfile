@@ -1,0 +1,10 @@
+2022-01-06 09:49:54.027 GMT [14365] LOG:  starting PostgreSQL 14.0 on x86_64-apple-darwin20.6.0, compiled by Apple clang version 13.0.0 (clang-1300.0.29.3), 64-bit
+2022-01-06 09:49:54.029 GMT [14365] LOG:  listening on IPv6 address "::1", port 5432
+2022-01-06 09:49:54.029 GMT [14365] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-01-06 09:49:54.034 GMT [14365] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2022-01-06 09:49:54.040 GMT [14366] LOG:  database system was shut down at 2022-01-06 09:49:44 GMT
+2022-01-06 09:49:54.045 GMT [14365] LOG:  database system is ready to accept connections
+2022-01-06 09:50:05.116 GMT [14411] FATAL:  database "whale_tracker_development" does not exist
+2022-01-06 09:50:20.464 GMT [14416] FATAL:  database "whale_tracker_development" does not exist
+2022-01-06 09:50:23.541 GMT [14418] FATAL:  database "whale_tracker_development" does not exist
+2022-01-06 09:50:25.032 GMT [14420] FATAL:  database "whale_tracker_development" does not exist
