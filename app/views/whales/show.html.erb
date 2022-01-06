@@ -3,7 +3,6 @@
     require 'json'
     require 'pry'
 
-<%
 profile = @whale.name
 
 url = "https://api.opensea.io/api/v1/user/#{profile}"
@@ -18,7 +17,17 @@ user = JSON.parse(user_serialized) %>
 url = "https://etherscan.io/address/#{user['account']['address']}"
 html_file = URI.open(url).read
 html_doc = Nokogiri::HTML(html_file)
-html_doc.search('.showAge').each do |element| %>
-<p class="p-4"><%= element.text.strip %> </p>
+html_doc.search('.showAge').each do |time| %>
 
+<%  html_doc.search('.hash-tag.text-truncate.myFnExpandBox_searchVal').each do |hash| %>
+<p class="p-4"><%= hash.text.strip %> </p>
+<p class="p-4"><%= time.text.strip %> </p>
+
+<%  url = "https://etherscan.io/tx/#{hash.text.strip}"
+html_file = URI.open(url).read
+html_doc = Nokogiri::HTML(html_file)
+html_doc.search('hello').each do |details| %>
+<p> <%= details.text.strip %> </p>
+<% end %>
+<%  end %>
 <%  end %>
