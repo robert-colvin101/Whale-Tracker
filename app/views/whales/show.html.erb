@@ -1,12 +1,11 @@
 <%  require 'open-uri'
-require 'nokogiri'
+    require 'nokogiri'
+    require 'json'
+    require 'pry'
 
- profile = @whale.name
-url = "https://opensea.io/#{profile}?tab=activity" %>
+<%
+profile = @whale.name
 
-
-<%  require 'json'
-require 'open-uri'
 url = "https://api.opensea.io/api/v1/user/#{profile}"
 user_serialized = URI.open(url).read
 user = JSON.parse(user_serialized) %>
@@ -14,3 +13,12 @@ user = JSON.parse(user_serialized) %>
 <p class="p-4"><%=  user['username'] %> <br>
 <%= user['account']['address'] %>
 </p>
+
+<%
+url = "https://etherscan.io/address/#{user['account']['address']}"
+html_file = URI.open(url).read
+html_doc = Nokogiri::HTML(html_file)
+html_doc.search('.showAge').each do |element| %>
+<p class="p-4"><%= element.text.strip %> </p>
+
+<%  end %>
