@@ -1,0 +1,14 @@
+<%  require 'open-uri'
+require 'nokogiri'
+
+ profile = @whale.name
+url = "https://opensea.io/#{profile}?tab=activity" %>
+
+
+<%  require 'json'
+require 'open-uri'
+url = "https://api.opensea.io/api/v1/user/#{profile}"
+user_serialized = URI.open(url).read
+user = JSON.parse(user_serialized) %>
+<%=  user['username'] %>
+<%= user['account']['address'] %>

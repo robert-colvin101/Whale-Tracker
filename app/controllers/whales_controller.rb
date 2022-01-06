@@ -9,10 +9,9 @@ class WhalesController < ApplicationController
   end
 
   def create
-    @whale = Whale.new(gym_params)
-    @whale.user = current_user
+    @whale = Whale.new(whale_params)
     if @whale.save
-      redirect_to gym_path(@whale)
+      redirect_to whale_path(@whale)
     else
       render :new
     end
@@ -27,21 +26,21 @@ class WhalesController < ApplicationController
 
   def update
     @whale.update(gym_params)
-    redirect_to gym_path(@whale)
+    redirect_to whale_path(@whale)
   end
 
   def destroy
     @whale.destroy
-    redirect_to gyms_path
+    redirect_to whale_path
   end
 
   private
 
-  def set_gym
+  def set_whale
     @whale = Whale.find(params[:id])
   end
 
-  def gym_params
+  def whale_params
     params.require(:whale).permit(:profile, :name)
   end
 end
