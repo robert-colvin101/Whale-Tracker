@@ -203,6 +203,9 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    watir (7.1.0)
+      regexp_parser (>= 1.2, < 3)
+      selenium-webdriver (~> 4.0)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -248,6 +251,7 @@ DEPENDENCIES
   spring
   turbolinks (~> 5)
   tzinfo-data
+  watir
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)

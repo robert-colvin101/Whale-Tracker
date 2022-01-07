@@ -1,8 +1,23 @@
 <%  require 'open-uri'
     require 'nokogiri'
     require 'json'
+    require 'rubygems'
     require 'pry'
+    require 'watir'
 
+def scraper()
+browser = Watir::Browser.new :chrome
+browser.goto('https://opensea.io/CalcioNFT?search[sortBy]=LAST_TRANSFER_DATE&search[sortAscending]=false&tab=activity')
+js_doc = browser.element(css: "a.styles__StyledLink-sc-l6elh8-0.ekTmzq.CollectionLink--link.CollectionLink--isSmall").wait_until(&:present?)
+news = Nokogiri::HTML(js_doc.inner_html)
+news.search('a.styles__StyledLink-sc-l6elh8-0.ekTmzq.CollectionLink--link.CollectionLink--isSmall').each do |details| %>
+<%= details.text.strip %>
+<% end %>
+<% end %>
+
+<%= scraper %>
+
+<%
 profile = @whale.name
 
 url = "https://api.opensea.io/api/v1/user/#{profile}"
@@ -14,6 +29,15 @@ user = JSON.parse(user_serialized) %>
 </p>
 
 <%
+url = "https://opensea.io/#{profile}?search[sortBy]=LAST_TRANSFER_DATE&search[sortAscending]=false&tab=activity"
+html_file = URI.open(url).read
+html_doc = Nokogiri::HTML(html_file)
+html_doc.search('.Blockreact__Block-sc-1xf18x6-0.ckZjBZ').each do |node| %>
+  <%= node.text.strip %>
+  <% end %>
+%>
+
+<%
 url = "https://etherscan.io/address/#{user['account']['address']}"
 html_file = URI.open(url).read
 html_doc = Nokogiri::HTML(html_file)
@@ -23,11 +47,7 @@ html_doc.search('.showAge').each do |time| %>
 <p class="p-4"><%= hash.text.strip %> </p>
 <p class="p-4"><%= time.text.strip %> </p>
 
-<%  url = "https://etherscan.io/tx/#{hash.text.strip}"
-html_file = URI.open(url).read
-html_doc = Nokogiri::HTML(html_file)
-html_doc.search('hello').each do |details| %>
-<p> <%= details.text.strip %> </p>
-<% end %>
 <%  end %>
 <%  end %>
+
+
